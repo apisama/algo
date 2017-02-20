@@ -60,20 +60,4 @@ function (){
 		return true;
 	}
 
-
-	function test_it_sorts(){
-		let arr = [3,4,3,1,5,6];
-		let exp = [1,3,3,4,5,6];
-		console.log("Input: ", arr);
-		sort(arr);
-		console.log("output: ", arr);
-		console.log("expected", exp);
-
-		if (arrayIsEquals(arr,exp)){
-			console.log("success");
-		}
-		else {
-			console.log("failed")
-		}
-	}
 }();
