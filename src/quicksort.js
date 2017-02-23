@@ -1,4 +1,4 @@
-function (){
+(function (){
 	window.quicksort =  function(array){
 		quicksort(array, 0, array.length - 1);
 	}
@@ -60,4 +60,4 @@ function (){
 		return true;
 	}
 
-}();
+})();
