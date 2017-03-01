@@ -22,6 +22,31 @@ minHeap.prototype.pop = function pop(){
 	return ret;
 }
 
+minHeap.prototype.find = function(item){
+	for(var i = 0; i < this.heap.length; i++){
+		if(this.heap[i] === item){
+			return i;
+		}
+	}
+	return null;
+}
+
+minHeap.prototype.remove = function(lookup){
+	//find node of item O(n)
+	var item = this.find(lookup);
+	//swap with last item
+	if(item != null){
+		swap(this.heap, item, this.heap.length - 1);
+		//delete last item
+		this.heap.pop()
+		//bubbledown swapped element
+		bubbleDown(item, this.heap);
+	}
+}
+
+minHeap.prototype.top = function(){
+	return this.heap[0] != undefined ? this.heap[0] : null;
+}
 
 function parent(n, heap){
 	var p = Math.floor((n - 1)/ 2);
