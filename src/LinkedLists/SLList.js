@@ -1,12 +1,21 @@
 module.exports = SSList;
 
+/* Private constants */
+var BASE = 10;
+
+
 function Node(data){
 	this.next = null;
 	this.data = data;
 }
 
-function SSList(){
+function SSList(array){
 	this.head = null;
+	if(array){
+		for(var i = 0; i < array.length; i++){
+			this.push(array[i]);
+		}
+	}
 }
 
 SSList.prototype.push = function(data){
@@ -20,17 +29,20 @@ SSList.prototype.push = function(data){
 		tail = tail.next;
 	}
 	tail.next = node;
-
+	return node;
 }
 
 SSList.prototype.remove = function(node){
-	//find node before it
 	var curr = this.head;
+	if(curr == node){
+		this.head = this.head.next;
+	}
+
 	while(curr.next != node && curr !== null){
 		curr = curr.next;
 	}
 
-	if(curr !== null){
+	if(curr == null){
 		return;
 	}
 
@@ -58,6 +70,25 @@ SSList.prototype.removeDuplicates = function(){
 	}
 }
 
+
+SSList.prototype.getNodeFromLast = function (n){
+	var node = this.head;
+	var curr = node;
+
+	while(curr !== null){
+		if(n < 0){
+			node = node.next;
+		}
+		else{
+			n--;
+		}
+
+		curr = curr.next;
+	}
+
+	return n < 0 ? node : null;
+}
+
 SSList.prototype.toArray = function() {
 	var curr = this.head;
 	var arr = [];
@@ -68,3 +99,35 @@ SSList.prototype.toArray = function() {
 
 	return arr;
 };
+
+/* Static methods */
+SSList.add = function(list_a, list_b){
+	var carry = 0;
+	var curr_a = list_a.head;
+	var curr_b = list_b.head;
+	var sum = new SSList();
+
+	while(curr_a != null || curr_b != null || carry > 0){
+		var val_a = curr_a != null ? curr_a.data : 0;
+		var val_b = curr_b != null ? curr_b.data : 0;
+		var val_sum = val_a + val_b + carry;
+
+		if(val_sum >= BASE){
+			carry = 1;
+			val_sum = val_sum % BASE;
+		}
+		else {
+			carry = 0;
+		}
+
+		var n_sum = new Node(val_sum);
+		n_sum.next = sum.head;
+		sum.head = n_sum;
+
+		curr_a = curr_a != null ? curr_a.next : null;
+		curr_b = curr_b != null ? curr_b.next : null;
+	}
+
+	return sum;
+
+}
