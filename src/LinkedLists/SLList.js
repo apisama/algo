@@ -92,6 +92,7 @@ SSList.prototype.getNodeFromLast = function (n){
 SSList.prototype.toArray = function() {
 	var curr = this.head;
 	var arr = [];
+	if(curr == null) return [];
 	do{
 		arr.push(curr.data);
 		curr = curr.next;

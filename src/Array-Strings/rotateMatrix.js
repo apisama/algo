@@ -30,7 +30,7 @@ function rotate(i, n){
  *
  * row = i / N
  * col = i % N
- * i = N * row + col //how is this possible?!! Because we are using integer division, thus we need the col value to offset
+ * i = N * row + col
  *
  * 
  */
